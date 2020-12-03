@@ -63,13 +63,17 @@ const vGrade = {
     'V17'
   ]
 };
+const searchArray = {
+  lat: [],
+  lon: []
+};
 
 const resultsArray = {
-    geocode: [],
     name: [],
     grade: [],
-    link: []
-}
+    link: [],
+    videos: []
+};
 
 /********** HTML Generation Functions **********/
 // generates html for start page
@@ -169,25 +173,39 @@ function formatYoutubeParams(params) {
 }
 
 /********** API fetch functions **********/
+
+// TO-DO:
+    // create the request url utilizing format function
+    // use location string as parameter
+    // fetch data from geocoding/radar API (HOW TO FORMAT URL????)
+    // SAMPLE REQUEST
+    // curl "https://api.radar.io/v1/geocode/forward?query=20+jay+st+brooklyn+ny" \
+    //   -H "Authorization: prj_live_pk_..."
+    // push lat/lon data into [searchArray]
 function getLocationGeocode() {
   const location = $('input[type=text]').val();
-  let params = {
+  const params = {
     key: API[0].key,
     q: location,
-  }
+    };
 
-  let queryString = formatGeocodingParams(params);
+  const queryString = formatGeocodingParams(params);
 
 
 }
 
+// TO-DO:
+    // create request url utilizing format function
+    // use lat, lon, minDiff, maxDiff as parameters
+    // fetch data from Mountain Project API
+    // WILL NEED TO PUSH DATA for name, grade, mountain project link to [resultsArray]
 function getRoutesLatLon() {
   const minDiff = $('#js-search-minDiff option:selected').val();
   const maxDiff = $('#js-search-maxDiff option:selected').val();
   const params = {
     key: API[1].key,
-    lat: geocode[0],
-    lon: geocode[1],
+    lat: searchArray.lat,
+    lon: searchArray.lon,
     minDiff: minDiff,
     maxDiff: maxDiff
     };
@@ -202,6 +220,11 @@ function getRoutesLatLon() {
     .then(response => response.json())
 }
 
+// create request url utilizing format function
+// use name and grade and 'bouldering' as parameters
+// TO-DO:
+    // fetch data from YouTube API
+    // push video data into [resultsArray.videos]
 function getYoutubeVideos() {
   const name = resultsArray.name;
   const grade = resultsArray.grade;
@@ -210,9 +233,9 @@ function getYoutubeVideos() {
   const params = {
     key: API[2].key,
     maxResults: $('input[type:number][id:js-max-results]').val()
-  };
+    };
 
-  let queryString = formatYoutubeParams(params);
+  const queryString = formatYoutubeParams(params);
   const url = API[2].searchURL + '?' + queryString + '&q=' + q;
 
   console.log(url);
@@ -222,8 +245,31 @@ function getYoutubeVideos() {
     .then(response => response.json());
 }
 
+// TO-DO:
+    // displays reults to the DOM
+    // Each results will display:
+    // name of boulder problem, grade, link to mountain project, [#] videos of the problem from youtube
+    // NEED TO FIGURE OUT: How to display responses from multiple API sources
 function displayResults(responseJson) {
-  console.log()
+  const maxResults = $('#js-max-results').val();
+    console.log(Displaying Results);
+  if (responseJson === "0") {
+    $('#js-error-message').text(`Oops! Looks like there aren't any boulder problems in that area. 
+    Try another search.`);
+  }
+  else {
+    for (let i=0; i < maxResults; i++) {
+      $('#results-list').append(`
+      <li><h3>NAME OF BOULDER PROBLEM</h3>
+      <p>GRADE</p>
+      <p><a href="">LINK TO MOUNTAIN PROJECT PAGE</a></p>
+      <ul>
+        YOUTUBE VIDEOS
+      </ul>
+      </li>
+      `);
+    }
+  }
 }
 
 /********** Event Listener Functions **********/
@@ -248,6 +294,7 @@ function handleSearchForm() {
   $('#search-page-btn').click(event => {
     console.log('Search Form clicked')
     event.preventDefault();
+    $('#results-list').empty();
     $('main').html(generateSearchForm());
     generateGradeList();
   })

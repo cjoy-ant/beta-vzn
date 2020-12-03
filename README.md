@@ -12,6 +12,6 @@ The app will return a list of boulder problems, diplaying for a single result:
     -Embedded YouTube videos
 
 This app will grab data from 3 sources:
-    -Google Maps Geocoding API
+    -Google Maps Geocoding API **** need to change this due to Google Maps Geocoding requiring billing
     -Mountain Project Data API
     -YouTube Data API
