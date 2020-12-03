@@ -6,7 +6,7 @@
 
 /********** Background **********/
 body {
-  background: url("background-1.jpg") no-repeat center fixed;
+  background: url("images/background-1.jpg") no-repeat center fixed;
   background-size: cover;
   margin: 3% 5% 3% 5%;
 }
