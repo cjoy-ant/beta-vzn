@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+.hidden {
+  display: none;
+}
+
+/********** Background **********/
+body {
+  background: url("background-1.jpg") no-repeat center fixed;
+  background-size: cover;
+  margin: 3% 5% 3% 5%;
+}
+
+/********** Type **********/
+body {
+  font-family: Raleway;
+}
+
+div {
+  font-weight: bold;
+}
+
+/********** Header & Navigation **********/
+header {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0 5% 2.5% 5%;
+  border-radius: 10px;
+}
+
+header h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+header nav {
+  font-weight: bold;
+  font-size: 18px;
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+}
+  
+header nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0 0 0 0;
+}
+
+header nav ul li a {
+  color: whitesmoke;
+  text-decoration: none;
+  margin: 0 20px 0 0;
+}
+
+header nav ul li:last-child a {
+  margin: 0;
+}
+
+/********** Form **********/
+div {
+  margin: 0 5% 3% 5%;
+  padding: 2% 5% 2% 5%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+#js-search-location, #js-max-results {
+  margin-left: 5px;
+  padding: 4px;
+}
+
+#js-search-location {
+  margin-bottom: 5px;
+}
+
+button, input, select {
+  box-shadow:inset 0px 1px 0px 0px #ffffff;
+  background-color:#ffffff;
+  border-radius:8px;
+  border:1px solid #dcdcdc;
+  display:inline-block;
+  cursor:pointer;
+  font-weight:bold;
+  font-family: Raleway;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #ffffff;
+  margin-top: 5px;
+}
+
+select {
+    margin: 5px 0px 0px 20px;
+    padding: 4px;
+  }
+    
+ul.search {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#search-btn {
+  padding: 8px;
+  margin-left: 20px;
+}
+
+/********** Desktop **********/
+@media all and (min-width:600px) {
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 0 5%;
+  }
+
+  header h1 {
+    font-size: 48px;
+    margin: 2% 0 1% 0;
+  }
+
+  header nav {
+    margin: 2% 6% 2% 0;
+  }
+}
