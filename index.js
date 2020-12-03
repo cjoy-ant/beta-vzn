@@ -249,7 +249,8 @@ function handleSearchForm() {
     console.log('Search Form clicked')
     event.preventDefault();
     $('main').html(generateSearchForm());
-  });
+    generateGradeList();
+  })
 }
 
 function handleSubmit() {
@@ -267,7 +268,6 @@ function runApp(){
   handleAboutPage();
   handleSearchForm();
   handleSubmit();
-  generateGradeList();
 }
 
 $(runApp())
