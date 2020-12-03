@@ -117,8 +117,9 @@ function generateAboutPage() {
 
 function generateSearchPage() {
   console.log('Generating Search Page');
+  handleSubmit();
   return `
-    <div class="container">
+    <div class="search">
 
     <h2>Need beta? Search for boulder problems</h2>
 
