@@ -252,7 +252,7 @@ function getYoutubeVideos() {
     // NEED TO FIGURE OUT: How to display responses from multiple API sources
 function displayResults(responseJson) {
   const maxResults = $('#js-max-results').val();
-    console.log(Displaying Results);
+    console.log('Displaying Results');
   if (responseJson === "0") {
     $('#js-error-message').text(`Oops! Looks like there aren't any boulder problems in that area. 
     Try another search.`);
@@ -300,11 +300,12 @@ function handleSearchForm() {
   })
 }
 
+// TO-DO:
+    // add GET functions to run when SEARCH is clicked
 function handleSubmit() {
   $('#search-btn').click(event => {
     console.log('Searching');
     event.preventDefault();
-    getYoutubeVideos();
   });
 }
 
