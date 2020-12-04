@@ -117,15 +117,26 @@ function generateAboutPage() {
 
 function generateSearchPage() {
   console.log('Generating Search Page');
-  handleSubmit();
   return `
     <div class="search">
 
     <h2>Need beta? Search for boulder problems</h2>
 
     <form class="search" id="search-form">
-      <label for="search-location">Location:</label>
+      <label for="search-location">Location: </label>
       <input type="text" name="search-location" id="js-search-location" placeholder="Enter a Location..." required>
+      <br>
+      <label for="search-minDiff">Minimum Grade</label>
+      <ul class="search" id="js-search-minDiff-list">
+        <select class="search" name="search-minDiff" id="js-search-minDiff" required></select>
+      </ul>
+      <label for="search-maxDiff">Maximum Grade</label>
+      <ul class="search" name="search-maxDiff" id="js-search-maxDiff-list">
+        <select class="search" name="search-maxDiff" id="js-search-maxDiff" required></select>
+      </ul>
+      <br>
+      <label for="max-results">Maximum number of Results to Show</label>
+      <input type="number" name="max-results" id="js-max-results" value="10">
       <br>
       <input type="submit" name="search-button" id="search-btn" value="Search">
     </form>
@@ -143,6 +154,11 @@ function generateSearchPage() {
     </div>
     `;
 }
+
+//function generateSearchPage() {
+//    generateSearchPageHtml();
+//    handleSubmit();
+//}
 
 // generates html for drop down list for min/max grades
 function generateGradeList() {
@@ -191,12 +207,13 @@ function getLocationGeocode() {
   const location = $('input[type=text]').val();
   const params = {
     key: API[0].key,
-    q: location,
+    location: location
     };
 
   const queryString = formatGeocodingParams(params);
   const url = API[0].searchURL + '?' + queryString;
 
+  console.log(url);
 //  fetch(url)
 //    .then(response => response.json())
 //    .then(responseJson => pushToSearchArray(responseJson))
@@ -208,8 +225,13 @@ function getLocationGeocode() {
 // pushes lat lon data from mapquests API
 //function pushToSearchArray(responseJson) {
 //  console.log(responseJson);
+//
+//  const lat = $(responseJson.results[0].locations[0].latLng.lat);
+//  const lon = $(responseJson.results[0].locations[0].latLng.lon);
+//
 //  const lat = $(responseJson["results"]["locations"]["latLng"]["lat"]);
 //  const lon = $(responseJson["results"]["locations"]["latLng"]["lng"]);
+//
 //  latArray.push(lat);
 //  lonArray.push(lon);
 //}
@@ -327,6 +349,7 @@ function handleSearchPage() {
     $('#results-list').empty();
     $('main').html(generateSearchPage());
     generateGradeList();
+    handleSubmit();
   });
 }
 
@@ -337,14 +360,14 @@ function handleSubmit() {
   $('form').submit(event => {
     event.preventDefault();
     console.log('Searching');
-//    const locationString = $('#js-search-location').val();
-//    locationArray.push(locationString);
-//    getLocationGeocode();
+    const locationString = $('#js-search-location').val();
+    locationArray.push(locationString);
+    getLocationGeocode();
   });
 }
 
 /********** Initializing Function **********/
-function runApp(){
+function runApp() {
   generateHomePage();
   handleHomePage();
   handleAboutPage();
