@@ -18,7 +18,8 @@ const API = [
   },
   {
     source: 'youtube',
-    key: 'AIzaSyDylE853GqLUzIKstJZ-ZLoABfXaZ2T01Y',
+    //key: 'AIzaSyDylE853GqLUzIKstJZ-ZLoABfXaZ2T01Y',
+    key: 'AIzaSyB-h0eBXMjN9EAO8nVifZkv3zh3QHuV7K8',
     searchURL: 'https://www.googleapis.com/youtube/v3/search'
   },
 ];
@@ -132,19 +133,23 @@ function generateSearchPage() {
       <form class="search" id="search-form">
         <label for="search-location">Location: </label>
         <input type="text" name="search-location" id="js-search-location" placeholder="City, State" required>
-        <br>
+        <p class="small">Example: Joshua Tree, CA</p>
+
         <label for="search-minDiff">Minimum Grade</label>
         <ul class="search" id="js-search-minDiff-list">
           <select class="search" name="search-minDiff" id="js-search-minDiff" required></select>
         </ul>
+
         <label for="search-maxDiff">Maximum Grade</label>
         <ul class="search" name="search-maxDiff" id="js-search-maxDiff-list">
           <select class="search" name="search-maxDiff" id="js-search-maxDiff" required></select>
         </ul>
+
         <br>
         <label for="max-results">Maximum number of Results to Show</label>
         <input type="number" name="max-results" id="js-max-results" min="1" max="10" placeholder="#">
         <p class="small">Enter a number 1-10</p>
+
         <input type="submit" name="search-button" id="search-btn" value="Search">
       </form>
       </div>
@@ -161,11 +166,6 @@ function generateSearchPage() {
 
     `;
 }
-
-//function generateSearchPage() {
-//    generateSearchPageHtml();
-//    handleSubmit();
-//}
 
 // generates html for drop down list for min/max grades
 function generateGradeList() {
@@ -300,6 +300,7 @@ function pushToResultsArray(responseJson) {
     console.log('Mountain Project links: ' + linkArray);
 
     getYoutubeVideos();
+//    displayResults();
   }
   else {
     // if there are no routes that match the search criteria, display error message
@@ -325,7 +326,7 @@ function getYoutubeVideos() {
       key: API[2].key,
       // maxResults for videos defaulted to 3
       // TO-DO: change back to 3
-      maxResults: 2 //$('input[type:number][id:js-max-results]').val()
+      maxResults: 2
       };
 
     const queryString = formatYoutubeParams(params);
@@ -337,8 +338,8 @@ function getYoutubeVideos() {
     fetch(url)
       .then(response => response.json())
       .then(responseJson => pushToVideosArray(responseJson));
-//    .catch()
   }
+  console.log(videosObj);
   displayResults();
 }
 
@@ -346,6 +347,7 @@ function getYoutubeVideos() {
 function pushToVideosArray(responseJson) {
   console.log(responseJson);
   counter.onResult++;
+  console.log(`Pushing videos to videosObj[${counter.onResult}]`);
 //  const index = counter.onResult + 1;
 //  const numResults = $('#js-max-results').val();
   videosObj[counter.onResult] = [];
@@ -353,7 +355,7 @@ function pushToVideosArray(responseJson) {
   for (let j=0; j < 2; j++) {
     const videoId = responseJson.items[j].id.videoId;
     console.log(`Video ${j+1}: https://www.youtube.com/watch?v=` + videoId);
-    videosObj[`${counter.onResult}`].push(videoId)
+    videosObj[`${counter.onResult}`].push(videoId);
   }
 }
 
@@ -389,18 +391,20 @@ function displayResults() {
   console.log('Displaying results');
   $('.results').removeClass('hidden');
 //  const numResults = $('#js-max-results').val();
-  const index = nameArray.length;
+//  const index = nameArray.length;
 
   // iterates through Mountain Project data from respective arrays and generates HTML for results
   // TO-DO: change back to i < numResults
-  for (let i=0; i < index; i++) {
+  for (let i=0; i < 2; i++) {
     $('#results-list').append(`
     <li id="results-item-${i}"><h3>${nameArray[i]}</h3>
     <p>Grade: ${gradeArray[i]}</p>
-    <p><a href="${linkArray[i]}" target="_blank">Click here to view this problem on Mountain Project</a></p>
+    <p><a href="${linkArray[i]}" target="_blank">
+    View this problem on Mountain Project</a></p>
     <h4>Beta Videos:</h4>
     </li>
     `);
+
     appendVideos(i);
   }
 }
@@ -416,9 +420,10 @@ function displayResults() {
 function appendVideos(i) {
 //  const index = counter.onResult - 1;
   for (let j=0; j < 2; j++) {
-  const videoId = videosObj[i+1][j];
+  const videoId = videosObj[i][j];
   $(`#results-item-${i}`).append(`
-    <p id='video-${j+1}'><a href="https://youtube.com/watch?v=${videoId}" target="_blank">Video ${j+1}</a></p>`);
+    <p><a href="https://youtube.com/watch?v=${videoId}" 
+    target="_blank">Video ${j+1}</a></p>`);
   }
 }
 
@@ -464,6 +469,7 @@ function handleSubmit() {
     const locationString = $('#js-search-location').val();
     locationArray.push(locationString);
     getLocationGeocode();
+//      .then(results => displayResults(results));
   });
 }
 

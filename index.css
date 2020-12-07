@@ -79,7 +79,7 @@ div.home, div.about, div.search {
 }
 
 #js-search-location {
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   margin-left: 5px;
   padding: 4px;
 }
@@ -104,9 +104,9 @@ button, input, select {
 }
 
 select {
-    margin: 5px 0px 0px 20px;
-    padding: 4px;
-  }
+  margin: 5px 0px 0px 20px;
+  padding: 4px;
+}
     
 ul.search {
   list-style: none;
