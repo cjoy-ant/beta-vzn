@@ -20,6 +20,16 @@ div {
   font-weight: bold;
 }
 
+p.small {
+  font-size: 11px;
+  font-style: italic;
+}
+
+#js-error-message {
+  color: darkred;
+  font-size: 18px;
+}
+
 /********** Header & Navigation **********/
 header {
   background-color: rgba(0, 0, 0, 0.5);
@@ -61,20 +71,22 @@ header nav ul li:last-child a {
 }
 
 /********** Form **********/
-div {
+div.home, div.about, div.search {
   margin: 0 5% 3% 5%;
-  padding: 2% 5% 2% 5%;
+  padding: 2% 5% 5% 5%;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
 }
 
-#js-search-location, #js-max-results {
+#js-search-location {
+  margin-bottom: 5px;
   margin-left: 5px;
   padding: 4px;
 }
 
-#js-search-location {
-  margin-bottom: 5px;
+#js-max-results {
+  margin: 0 0 0 5px;
+  padding: 4px;
 }
 
 button, input, select {
@@ -107,6 +119,39 @@ ul.search {
   margin-left: 20px;
 }
 
+/********** Results **********/
+div.results {
+  background: none;
+  margin: 0 5% 3% 5%;
+}
+
+div.results h2 {
+  background-color: rgba(0, 0, 0, 0.6);
+  margin: 5% 0 5% 0; 
+  padding: 2% 7% 2% 7%;
+  border-radius: 10px;
+  color: whitesmoke;
+  text-align: center;
+}
+
+#results-list {
+  padding: 0;
+  list-style: none;
+}
+
+#results-list li {
+  list-style: none;
+  list-style-position: inside;
+  background-color:rgba(255, 255, 255, 0.9);
+  margin-bottom: 5%; 
+  padding: 2% 7% 2% 7%;
+  border-radius: 10px;
+}
+
+#results-list li h3 {
+  text-align: center;
+}
+  
 /********** Desktop **********/
 @media all and (min-width:600px) {
   header {
