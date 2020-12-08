@@ -1,24 +1,30 @@
 // API source/key data
 const API = [
-    {
-      source: 'mapquest',
-      key: 'oiX815Jb2u30RoL5uKEc8khC8tFZB6jE',
-      searchURL: 'http://open.mapquestapi.com/geocoding/v1/address'
-    },
-    {
-      source: 'mountainProject',
-      key: '200138130-f4390060c061491452450bed66677057',
-      searchURL: 'https://www.mountainproject.com/data/get-routes-for-lat-lon'
-    },
-    {
-      source: 'youtube',
-      key: 'AIzaSyDylE853GqLUzIKstJZ-ZLoABfXaZ2T01Y',
-      //key: 'AIzaSyB-h0eBXMjN9EAO8nVifZkv3zh3QHuV7K8',
-      searchURL: 'https://www.googleapis.com/youtube/v3/search'
-    },
-  ];
-  
-  // data for Vgrade/difficulty drop down lists
+  {
+    //source: 'googleMaps',
+    //apiKey: 'AIzaSyDylE853GqLUzIKstJZ-ZLoABfXaZ2T01Y',
+    //searchURL: 'https://maps.googleapis.com/maps/api/geocode/json?'
+    //source: 'radar',
+    //key: 'prj_test_sk_af3f1b2b1f02bcacc30fe82515eb407fefeb30eb',
+    //searchURL: 'https://api.radar.io/v1/geocode/forward'
+    source: 'mapquest',
+    key: 'oiX815Jb2u30RoL5uKEc8khC8tFZB6jE',
+    searchURL: 'http://open.mapquestapi.com/geocoding/v1/address'
+  },
+  {
+    source: 'mountainProject',
+    key: '200138130-f4390060c061491452450bed66677057',
+    searchURL: 'https://www.mountainproject.com/data/get-routes-for-lat-lon'
+  },
+  {
+    source: 'youtube',
+    //key: 'AIzaSyDylE853GqLUzIKstJZ-ZLoABfXaZ2T01Y',
+    key: 'AIzaSyB-h0eBXMjN9EAO8nVifZkv3zh3QHuV7K8',
+    searchURL: 'https://www.googleapis.com/youtube/v3/search'
+  },
+];
+
+// data for Vgrade/difficulty drop down lists
 const vGrade = {
   minimum: [
     'V0',
@@ -111,29 +117,9 @@ function generateAboutPage() {
   return `
     <div class="about">
       <h2>About</h2>
-
-      <p class="description">This is a rock climbing based app geared towards a particular discipline of climbing called 'bouldering'.
-      Bouldering involves climbing up rock faces without wearing a harness or being attached to an anchor point via a climbing rope. 
-      The climber follows the designated route up to the top of the boulder to get to the top! We call this sending a problem (short for 'ascend').</p>
-      
-      <p class="description">Bouldering is a more powerful, technical, and, arguably, a more dangerous form of rock climbing due to every fall being a ground fall. 
-      When climbing outside, climbers typically bring several crashpads to land on if they fall.</p>
-      
-      <p class="description">'Beta' is what we call an individual's solution to solving/sending a boulder problem. 
-      For example, a shorter climber may use different beta compared to a taller climber, such as stepping on higher footholds or grabbing onto smaller intermediate holds. 
-      Finding the beta that works for you is an essential part of climbing and bouldering. 
-      Sometimes getting beta from others in person or via videos can be an immense help, and that's where this app comes in!</p>
-      
-      <h3>How to use this app</h3>
-      <ul>
-        <li>Enter a location (City, State)</li>
-        <li>Choose the range of grades you would like to search for by adjusting the minimum and maximum grade</li>
-        <li>Enter a number 1-10 of how many results (boulder problems) you would like to populate</li>
-        <li>Click search!</li>
-      </ul>
-      
-      <p class="disclaimer">**Disclaimer: Data on boulder location and beta videos are dependent on, respectively, MapQuest and YouTube servers.
-      Results displayed on this app will reflect what is readily available. Therefore, the videos may not always be relevant to the corresponding boulder problem.</p>
+      <p>Description of this app.</p>
+      <p>How to use this app</p>
+      <p>Example screenshots of input/results</p>
     </div>
   `;
 }
@@ -143,9 +129,7 @@ function generateSearchPage() {
   return `
     <div class="search">
       
-      <h2>Need beta?</h2>
-      <h3>Search for boulder problems</h3>
-      <br>
+      <h2>Need beta? Search for boulder problems</h2>
       <form class="search" id="search-form">
         <label for="search-location">Location: </label>
         <input type="text" name="search-location" id="js-search-location" placeholder="City, State" required>
@@ -166,17 +150,16 @@ function generateSearchPage() {
         <input type="number" name="max-results" id="js-max-results" min="1" max="10" placeholder="#">
         <p class="small">Enter a number 1-10</p>
 
-        <br>
         <input type="submit" name="search-button" id="search-btn" value="Search">
       </form>
-    </div>
+      </div>
 
     <div class="error hidden">
       <p class="error-message" id="js-error-message"></p>
     </div>
 
     <div class="results hidden">
-      <h2 id="results-header">Boulders & Beta</h2>
+      <h2>Boulders & Beta</h2>
       <ul id="results-list">
       </ul>
     </div>
@@ -219,7 +202,14 @@ function formatYoutubeParams(params) {
 
 /********** API fetch functions **********/
 
-// inputs location into mapquest API to geocode location into lat/lon data
+// TO-DO:
+    // create the request url utilizing format function
+    // use location string as parameter
+    // fetch data from geocoding/radar API (HOW TO FORMAT URL????)
+    // SAMPLE REQUEST
+    // curl "https://api.radar.io/v1/geocode/forward?query=20+jay+st+brooklyn+ny" \
+    //   -H "Authorization: prj_live_pk_..."
+    // push lat/lon data into [searchArray]
 function getLocationGeocode() {
   const location = $('#js-search-location').val();
   const params = {
@@ -299,7 +289,7 @@ function pushToResultsArray(responseJson) {
   // if there are routes available in the location, push results to respective arrays
   if (responseJson.routes.length > 0) {
     // TO-DO: change back to i < numResults
-    for (let i=0; i < numResults; i++) {
+    for (let i=0; i < 2; i++) {
       nameArray.push(responseJson.routes[i].name);
       gradeArray.push(responseJson.routes[i].rating);
       linkArray.push(responseJson.routes[i].url);
@@ -323,10 +313,10 @@ function pushToResultsArray(responseJson) {
 // use name, grade, and 'bouldering' as search queries
 function getYoutubeVideos() {
   const numResults = $('#js-max-results').val();
-  console.log('Searching for beta videos');
+  console.log('Searching for beta videos')
 
-  // TO-DO: change back to i < numResults
-  for (let i=0; i < numResults; i++) {
+//  // TO-DO: change back to i < numResults
+  for (let i=0; i < 2; i++) {
     // keeps track of what result it is on to be utilized as index for grabbing data from YouTube API response
     const name = nameArray[i];
     const grade = gradeArray[i];
@@ -336,7 +326,7 @@ function getYoutubeVideos() {
       key: API[2].key,
       // maxResults for videos defaulted to 3
       // TO-DO: change back to 3
-      maxResults: 3
+      maxResults: 2
       };
 
     const queryString = formatYoutubeParams(params);
@@ -345,31 +335,93 @@ function getYoutubeVideos() {
     // prints YouTube API request URL to the console
     console.log('YouTube GET request: ' + url);
 
-    fetch(url)
-      .then(response => response.json())
-      .then(responseJson => pushToVideosArray(responseJson, i));
+    fetchVideosAndDisplayThem(url)
+      .done(console.log(videosObj))
+      .done(displayResults());
   }
+//    fetch(url)
+//      .then(response => response.json())
+//      .then(responseJson => pushToVideosArray(responseJson));
+//  }
+//  console.log(videosObj);
+//  displayResults();
 }
+
+function fetchVideosAndDisplayThem(url){
+  fetch(url)
+    .then(response => response.json())
+    .then(responseJson => pushToVideosArray(responseJson));
+}
+
+//function loopAndFetchYoutubeVideos() {
+//  // TO-DO: change back to i < numResults
+//  for (let i=0; i < 2; i++) {
+//    // keeps track of what result it is on to be utilized as index for grabbing data from YouTube API response
+//    const name = nameArray[i];
+//    const grade = gradeArray[i];
+//    const q = name + '%20' + grade + '%20' + 'bouldering';
+//    const params = {
+//      key: API[2].key,
+//      // maxResults for videos defaulted to 3
+//      // TO-DO: change back to 3
+//      maxResults: 2
+//      };
+//    const queryString = formatYoutubeParams(params);
+//    const url = API[2].searchURL + '?' + queryString + '&q=' + q;
+//    
+//    // prints YouTube API request URL to the console
+//    console.log('YouTube GET request: ' + url);
+//    fetch(url)
+//      .then(response => response.json())
+//      .then(responseJson => pushToVideosArray(responseJson));
+//  }
+//}
 
 // pushes youTube video links to videosArray
-function pushToVideosArray(responseJson, i) {
+function pushToVideosArray(responseJson) {
   console.log(responseJson);
-  console.log(`Pushing videos to videosObj[${i}]`);
+  counter.onResult++;
+  console.log(`Pushing videos to videosObj[${counter.onResult}]`);
 
 //  const numResults = $('#js-max-results').val();
-  videosObj[i] = [];
+  videosObj[counter.onResult] = [];
 
-  // j < (number of videos to list)
-  for (let j=0; j < 3; j++) {
+  for (let j=0; j < 2; j++) {
     const videoId = responseJson.items[j].id.videoId;
     console.log(`Video ${j+1}: https://www.youtube.com/watch?v=` + videoId);
-    videosObj[`${i}`].push(videoId);
+    videosObj[`${counter.onResult}`].push(videoId);
   }
-  displayResults(i);
 }
 
+// TO-DO:
+    // displays reults to the DOM
+    // Each results will display:
+    // name of boulder problem, grade, link to mountain project, [#] videos of the problem from youtube
+    // NEED TO FIGURE OUT: How to display responses from multiple API sources
+//function displayResults() {
+//  const maxResults = $('#js-max-results').val();
+//  console.log('Displaying Results');
+//  if (responseJson === "0") {
+//    $('#js-error-message').text(`Oops! Looks like there aren't any boulder problems in that area. 
+//    Try another search.`);
+//  }
+//  else {
+//    for (let i=0; i < maxResults; i++) {
+//      $('#results-list').append(`
+//      <li><h3>NAME OF BOULDER PROBLEM</h3>
+//      <p>GRADE</p>
+//      <p><a href="">LINK TO MOUNTAIN PROJECT PAGE</a></p>
+//      <ul>
+//        YOUTUBE VIDEOS
+//      </ul>
+//      </li>
+//      `);
+//    }
+//  }
+//}
+
 // inputs html for each results into li in #results-list to display to the DOM
-function displayResults(i) {
+function displayResults() {
   console.log('Displaying results');
   $('.results').removeClass('hidden');
 //  const numResults = $('#js-max-results').val();
@@ -377,29 +429,34 @@ function displayResults(i) {
 
   // iterates through Mountain Project data from respective arrays and generates HTML for results
   // TO-DO: change back to i < numResults
-//    for (let i=0; i < 2; i++) {
+  for (let i=0; i < 2; i++) {
     $('#results-list').append(`
-    <li id="results-item-${i}"><h3 class="name">${nameArray[i]}</h3>
-    <p class="grade">Grade: ${gradeArray[i]}</p>
-    <p class="link"><a href="${linkArray[i]}" target="_blank">
+    <li id="results-item-${i}"><h3>${nameArray[i]}</h3>
+    <p>Grade: ${gradeArray[i]}</p>
+    <p><a href="${linkArray[i]}" target="_blank">
     View this problem on Mountain Project</a></p>
-    <h4 class="video">Beta Videos:</h4>
+    <h4>Beta Videos:</h4>
     </li>
     `);
 
     appendVideos(i);
-//    }
+  }
 }
 
 // iterates through Youtube video data from videosArray and appends <li> for each link to respective <ul>
 // TO-DO: change back to i < 3 (will display 3 videos)
+//    for (let i=0; i < 2; i++) {
+//    //    $(`#video-${i}`).append(`<a href="${videosArray[i]}" target="_blank">Video ${i+1}</a>`)
+//      $(`#results-item-${i}`).append(`
+//          <p id='video-${i+1}'><a href="${videosArray[i]}" target="_blank">Video ${i+1}</a></p>`);
+//    }
+
 function appendVideos(i) {
 //  const index = counter.onResult - 1;
-// j < (number of videos to list)
-  for (let j=0; j < 3; j++) {
+  for (let j=0; j < 2; j++) {
   const videoId = videosObj[i][j];
   $(`#results-item-${i}`).append(`
-    <p class="video"><a href="https://youtube.com/watch?v=${videoId}" 
+    <p><a href="https://youtube.com/watch?v=${videoId}" 
     target="_blank">Video ${j+1}</a></p>`);
   }
 }
@@ -413,64 +470,65 @@ function handleHomePage() {
       $('main').html(generateHomePage());
   });
 }
-  
-  // listens for when user clicks onf #about-page-btn in nav
-  function handleAboutPage() {
-    $('#about-page-btn').click(event => {
-      console.log('About Page clicked');
-      event.preventDefault();
-      $('main').html(generateAboutPage());
-    });
-  }
-  
-  // listens for when user clicks on #search-page-btn in nav
-  function handleSearchPage() {
-    $('#search-page-btn').click(event => {
-      console.log('Search Page clicked');
-      event.preventDefault();
-      $('#results-list').empty();
-      $('main').html(generateSearchPage());
-      generateGradeList();
-      handleSubmit();
-    });
-  }
-  
-  // listens for the user clicks #search-btn to submit form.search
-  // TO-DO:
-      // add GET functions to run when SEARCH is clicked
-  function handleSubmit() {
-    $('form').submit(event => {
-      event.preventDefault();
-      emptyData();
-      console.log('Searching');
-      const locationString = $('#js-search-location').val();
-      locationArray.push(locationString);
-      getLocationGeocode();
-  //      .then(results => displayResults(results));
-    });
-  }
-  
-  // empties the error-message and arrays holding information from previous search
-  function emptyData() {
-    $('.error').addClass('hidden');
-    $('#js-error-message').empty();
-    $('.results').addClass('hidden');
+
+// listens for when user clicks onf #about-page-btn in nav
+function handleAboutPage() {
+  $('#about-page-btn').click(event => {
+    console.log('About Page clicked');
+    event.preventDefault();
+    $('main').html(generateAboutPage());
+  });
+}
+
+// listens for when user clicks on #search-page-btn in nav
+function handleSearchPage() {
+  $('#search-page-btn').click(event => {
+    console.log('Search Page clicked');
+    event.preventDefault();
     $('#results-list').empty();
-    latArray.length = 0;
-    lonArray.length = 0;
-    nameArray.length = 0;
-    gradeArray.length = 0;
-    linkArray.length = 0;
-    videosObj.length = 0;
-  }
-  
-  /********** Initializing Function **********/
-  function runApp() {
-    generateHomePage();
-    handleHomePage();
-    handleAboutPage();
-    handleSearchPage();
+    $('main').html(generateSearchPage());
+    generateGradeList();
     handleSubmit();
-  }
-  
-  $(runApp)
+  });
+}
+
+// listens for the user clicks #search-btn to submit form.search
+// TO-DO:
+    // add GET functions to run when SEARCH is clicked
+function handleSubmit() {
+  $('form').submit(event => {
+    event.preventDefault();
+    emptyData();
+    console.log('Searching');
+    const locationString = $('#js-search-location').val();
+    locationArray.push(locationString);
+    getLocationGeocode();
+//      .then(results => displayResults(results));
+  });
+}
+
+// empties the error-message and arrays holding information from previous search
+function emptyData() {
+  $('.error').addClass('hidden');
+  $('#js-error-message').empty();
+  $('.results').addClass('hidden');
+  $('#results-list').empty();
+  latArray.length = 0;
+  lonArray.length = 0;
+  nameArray.length = 0;
+  gradeArray.length = 0;
+  linkArray.length = 0;
+  videosObj.length = 0;
+  counter.onResult = -1;
+}
+
+/********** Initializing Function **********/
+function runApp() {
+  generateHomePage();
+  handleHomePage();
+  handleAboutPage();
+  handleSearchPage();
+  handleSubmit();
+}
+
+$(runApp)

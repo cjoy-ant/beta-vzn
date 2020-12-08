@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
 
 .hidden {
   display: none;
@@ -70,11 +71,20 @@ header nav ul li:last-child a {
   margin: 0;
 }
 
+p.description {
+  font-size: 16px;
+}
+
+p.disclaimer {
+  font-style: italic;
+  font-size: 14px;
+}
+
 /********** Form **********/
 div.home, div.about, div.search {
-  margin: 0 5% 3% 5%;
+  margin: 0% 5% 3% 5%;
   padding: 2% 5% 5% 5%;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.85);
   border-radius: 10px;
 }
 
@@ -144,16 +154,39 @@ div.results h2 {
   list-style-position: inside;
   background-color:rgba(255, 255, 255, 0.9);
   margin-bottom: 5%; 
-  padding: 2% 7% 2% 7%;
+  padding: 2% 7% 5% 7%;
   border-radius: 10px;
 }
 
 #results-list li h3 {
   text-align: center;
 }
+
+h3.name {
+  font-family: 'Amatic SC';
+  font-size: 40px;
+  line-height: 5px;
+}
+
+p.grade, h4.video {
+  font-weight: bold;
+}
+
+p.video {
+  margin-left: 20px;
+  line-height: 4px;
+}
+
+a {
+  color: #163E56;
+}
   
 /********** Desktop **********/
 @media all and (min-width:600px) {
+  body {
+    margin: 3% 10% 3% 10%;
+  }
+
   header {
     display: flex;
     justify-content: space-between;
@@ -164,6 +197,18 @@ div.results h2 {
     font-size: 48px;
     margin: 2% 0 1% 0;
     padding: 0 0 0 0;
+  }
+
+  #results-header {
+    font-size: 48px;
+  }
+
+  h3.name {
+    font-size: 56px;
+  }
+
+  div p, div h4 {
+    font-size: 18px;
   }
 
   header nav {
