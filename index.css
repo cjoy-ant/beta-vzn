@@ -71,6 +71,10 @@ header nav ul li:last-child a {
   margin: 0;
 }
 
+div.about h3 {
+  text-transform: uppercase;
+}
+
 p.description {
   font-size: 16px;
 }
@@ -179,6 +183,15 @@ p.video {
 
 a {
   color: #163E56;
+}
+
+/********** Error **********/
+div.error {
+  background-color:rgba(255, 255, 255, 0.9);
+  margin: 0 5% 3% 5%;
+  padding: 1% 7% 1% 7%;
+  border-radius: 10px;
+  text-align: center;
 }
   
 /********** Desktop **********/

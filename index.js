@@ -100,7 +100,8 @@ function generateHomePage() {
   $('main').html(`
     <div class="home">
        <h2>Welcome to BetaVzn!</h2>
-       <p>Use this app to search for boulders in an area and find videos to give you beta!</p>
+       <p>Use this app to search for boulders in an area and find videos to give you beta.</p>
+       <p>Climb on!</p>
     </div>
     `);
 }
@@ -127,9 +128,10 @@ function generateAboutPage() {
       <h3>How to use this app</h3>
       <ul>
         <li>Enter a location (City, State)</li>
-        <li>Choose the range of grades you would like to search for by adjusting the minimum and maximum grade</li>
+        <li>Choose the range of difficulty level you would like to search for by selecting the Minimum and Maximum Grade</li>
         <li>Enter a number 1-10 of how many results (boulder problems) you would like to populate</li>
-        <li>Click search!</li>
+        <li>Click 'Search'</li>
+        <li>Each result will display the (1) Name of the problem (2) Grade (3) Link to the Mountain Project page, and (4) 3 YouTube Videos</li>
       </ul>
       
       <p class="disclaimer">**Disclaimer: Data on boulder location and beta videos are dependent on, respectively, MapQuest and YouTube servers.
@@ -163,7 +165,7 @@ function generateSearchPage() {
 
         <br>
         <label for="max-results">Maximum number of Results to Show</label>
-        <input type="number" name="max-results" id="js-max-results" min="1" max="10" placeholder="#">
+        <input type="number" name="max-results" id="js-max-results" min="1" max="10" value="1">
         <p class="small">Enter a number 1-10</p>
 
         <br>
@@ -236,10 +238,11 @@ function getLocationGeocode() {
   
   fetch(url)
     .then(response => response.json())
-    .then(responseJson => pushToSearchArray(responseJson));
-//    .catch(error => {
-//      $('#js-error-message').text(`Something went wrong`)
-//    });
+    .then(responseJson => pushToSearchArray(responseJson))
+    .catch(error => {
+      $('#js-error-message').text(`Something went wrong. ${error.message}`);
+      $('#js-error-message').removeClass('hidden');
+      });
 }
 
 // pushes lat lon data from mapquests API
@@ -287,7 +290,10 @@ function getRoutesLatLon() {
   fetch(url)
     .then(response => response.json())
     .then(responseJson => pushToResultsArray(responseJson))
-//    .catch(error =>)
+    .catch(error => {
+      $('#js-error-message').text(`Something went wrong: ${error.message}`);
+      $('#js-error-message').removeClass('hidden');
+    });
 }
 
 // pushes boulder information into their respective results arrays
@@ -347,7 +353,11 @@ function getYoutubeVideos() {
 
     fetch(url)
       .then(response => response.json())
-      .then(responseJson => pushToVideosArray(responseJson, i));
+      .then(responseJson => pushToVideosArray(responseJson, i))
+      .catch(error => {
+        $('#js-error-message').text(`Something went wrong: ${error.message}`);
+        $('#js-error-message').removeClass('hidden');
+      });
   }
 }
 
