@@ -185,6 +185,11 @@ a {
   color: #163E56;
 }
 
+iframe.video {
+  width: 100%;
+  height: 60vw;
+}
+
 /********** Error **********/
 div.error {
   background-color:rgba(255, 255, 255, 0.9);
@@ -195,7 +200,7 @@ div.error {
 }
   
 /********** Desktop **********/
-@media all and (min-width:600px) {
+@media all and (min-width:800px) {
   body {
     margin: 3% 10% 3% 10%;
   }
@@ -226,5 +231,11 @@ div.error {
 
   header nav {
     margin: 2% 6% 2% 0;
+  }
+
+  iframe.video {
+    width: 375px;
+    height: 228px;
+
   }
 }

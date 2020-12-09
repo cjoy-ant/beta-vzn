@@ -131,7 +131,7 @@ function generateAboutPage() {
         <li>Choose the range of difficulty level you would like to search for by selecting the Minimum and Maximum Grade</li>
         <li>Enter a number 1-10 of how many results (boulder problems) you would like to populate</li>
         <li>Click 'Search'</li>
-        <li>Each result will display the (1) Name of the problem (2) Grade (3) Link to the Mountain Project page, and (4) 3 YouTube Videos</li>
+        <li>Each result will display the (1) Name of the problem (2) Grade (3) Link to the Mountain Project page, and (4) 2 YouTube Videos</li>
       </ul>
       
       <p class="disclaimer">**Disclaimer: Data on boulder location and beta videos are dependent on, respectively, MapQuest and YouTube servers.
@@ -403,15 +403,26 @@ function displayResults(i) {
 
 // iterates through Youtube video data from videosArray and appends <li> for each link to respective <ul>
 // TO-DO: change back to i < 3 (will display 3 videos)
+//function appendVideos(i) {
+////  const index = counter.onResult - 1;
+//// j < (number of videos to list)
+//  for (let j=0; j < 3; j++) {
+//  const videoId = videosObj[i][j];
+//  $(`#results-item-${i}`).append(`
+//    <p class="video"><a href="https://youtube.com/watch?v=${videoId}" 
+//    target="_blank">Video ${j+1}</a></p>`);
+//  }
+//}
+// embeds youtube video into html and displays to DOM
 function appendVideos(i) {
-//  const index = counter.onResult - 1;
-// j < (number of videos to list)
-  for (let j=0; j < 3; j++) {
+  //  const index = counter.onResult - 1;
+  // j < (number of videos to list)
+  for (let j=0; j < 2; j++) {
   const videoId = videosObj[i][j];
   $(`#results-item-${i}`).append(`
-    <p class="video"><a href="https://youtube.com/watch?v=${videoId}" 
-    target="_blank">Video ${j+1}</a></p>`);
-  }
+  <iframe class="video" id="video-${i}${j}" src="https://www.youtube.com/embed/${videoId}">
+  </iframe>
+  `)};
 }
 
 /********** Event Listener Functions **********/
