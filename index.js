@@ -119,7 +119,7 @@ function generateAboutPage() {
       When climbing outside, climbers typically bring several crashpads to cushion their landing. 
       Climbers follow the designated route up to the top of the boulder, which is called "sending" a problem (short for 'ascend').</p>
       
-      <p class="description">'Beta' is what we call an individual's solutio, or movements used, to solve/send a boulder problem. 
+      <p class="description">'Beta' is what we call an individual's solution, or movements used, to solve/send a boulder problem. 
       For example, a shorter climber may use different beta compared to a taller climber, such as stepping on higher footholds or grabbing onto smaller intermediate holds. 
       Finding the beta that works for you is an essential part of climbing and bouldering. 
       Sometimes getting beta from others in person or via videos can be an immense help, and that's where this app comes in!</p>
