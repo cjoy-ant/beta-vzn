@@ -71,7 +71,7 @@ header nav ul li:last-child a {
   margin: 0;
 }
 
-div.about h3 {
+div.home h3, div.about h3 {
   text-transform: uppercase;
 }
 

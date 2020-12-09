@@ -101,7 +101,7 @@ function generateHomePage() {
     <div class="home">
        <h2>Welcome to BetaVzn!</h2>
        <p>Use this app to search for boulders in an area and find videos to give you beta.</p>
-       <h3>CLIMB ON!</h3>
+       <h3>Climb on!</h3>
     </div>
     `);
 }
