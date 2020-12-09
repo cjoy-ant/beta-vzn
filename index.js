@@ -115,10 +115,9 @@ function generateAboutPage() {
 
       <p class="description">This is a rock climbing based app geared towards a particular discipline of climbing called 'bouldering'.
       Bouldering involves climbing up rock faces without wearing a harness or being attached to an anchor point via a climbing rope. 
-      The climber follows the designated route up to the top of the boulder to get to the top! We call this sending a problem (short for 'ascend').</p>
-      
-      <p class="description">Bouldering is a more powerful, technical, and, arguably, a more dangerous form of rock climbing due to every fall being a ground fall. 
-      When climbing outside, climbers typically bring several crashpads to land on if they fall.</p>
+      Bouldering is a more powerful, technical, and, arguably, a more dangerous form of rock climbing due to every fall being a ground fall.
+      When climbing outside, climbers typically bring several crashpads to cushion their landing. 
+      Climbers follow the designated route up to the top of the boulder! We call this "sending" a problem (short for 'ascend').</p>
       
       <p class="description">'Beta' is what we call an individual's solution to solving/sending a boulder problem. 
       For example, a shorter climber may use different beta compared to a taller climber, such as stepping on higher footholds or grabbing onto smaller intermediate holds. 
