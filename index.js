@@ -101,7 +101,7 @@ function generateHomePage() {
     <div class="home">
        <h2>Welcome to BetaVzn!</h2>
        <p>Use this app to search for boulders in an area and find videos to give you beta.</p>
-       <p>Climb on!</p>
+       <h3>CLIMB ON!</h3>
     </div>
     `);
 }
@@ -117,9 +117,9 @@ function generateAboutPage() {
       Bouldering involves climbing up rock faces without wearing a harness or being attached to an anchor point via a climbing rope. 
       Bouldering is a more powerful, technical, and, arguably, a more dangerous form of rock climbing due to every fall being a ground fall.
       When climbing outside, climbers typically bring several crashpads to cushion their landing. 
-      Climbers follow the designated route up to the top of the boulder! We call this "sending" a problem (short for 'ascend').</p>
+      Climbers follow the designated route up to the top of the boulder, which is called "sending" a problem (short for 'ascend').</p>
       
-      <p class="description">'Beta' is what we call an individual's solution to solving/sending a boulder problem. 
+      <p class="description">'Beta' is what we call an individual's solutio, or movements used, to solve/send a boulder problem. 
       For example, a shorter climber may use different beta compared to a taller climber, such as stepping on higher footholds or grabbing onto smaller intermediate holds. 
       Finding the beta that works for you is an essential part of climbing and bouldering. 
       Sometimes getting beta from others in person or via videos can be an immense help, and that's where this app comes in!</p>
@@ -133,7 +133,7 @@ function generateAboutPage() {
         <li>Click 'Search'</li>
         <li>Each result will display the (1) Name of the problem (2) Grade (3) Link to the Mountain Project page, and (4) 2 YouTube Videos</li>
       </ul>
-      
+
       <br>
       <p class="disclaimer">**Disclaimer: Data on boulder location and beta videos are dependent on, respectively, MapQuest and YouTube servers.
       Results displayed on this app will reflect what is readily available. Therefore, the videos may not always be relevant to the corresponding boulder problem.</p>
