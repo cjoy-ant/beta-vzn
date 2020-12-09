@@ -123,7 +123,8 @@ function generateAboutPage() {
       For example, a shorter climber may use different beta compared to a taller climber, such as stepping on higher footholds or grabbing onto smaller intermediate holds. 
       Finding the beta that works for you is an essential part of climbing and bouldering. 
       Sometimes getting beta from others in person or via videos can be an immense help, and that's where this app comes in!</p>
-      
+      <br>
+    
       <h3>How to use this app</h3>
       <ul>
         <li>Enter a location (City, State)</li>
@@ -133,6 +134,7 @@ function generateAboutPage() {
         <li>Each result will display the (1) Name of the problem (2) Grade (3) Link to the Mountain Project page, and (4) 2 YouTube Videos</li>
       </ul>
       
+      <br>
       <p class="disclaimer">**Disclaimer: Data on boulder location and beta videos are dependent on, respectively, MapQuest and YouTube servers.
       Results displayed on this app will reflect what is readily available. Therefore, the videos may not always be relevant to the corresponding boulder problem.</p>
     </div>
