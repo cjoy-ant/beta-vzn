@@ -75,6 +75,11 @@ div.home h3, div.about h3 {
   text-transform: uppercase;
 }
 
+p.medium {
+  font-size: 14px;
+  font-style: italic;
+}
+
 p.description {
   font-size: 16px;
 }
