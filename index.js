@@ -3,7 +3,7 @@ const API = [
     {
       source: 'mapquest',
       key: 'oiX815Jb2u30RoL5uKEc8khC8tFZB6jE',
-      searchURL: 'http://open.mapquestapi.com/geocoding/v1/address'
+      searchURL: 'https://open.mapquestapi.com/geocoding/v1/address'
     },
     {
       source: 'mountainProject',
