@@ -174,7 +174,7 @@ function generateSearchPage() {
       </form>
     </div>
 
-    <div class="error hidden">
+    <div class="error hidden" id="error-container">
       <p class="error-message" id="js-error-message"></p>
     </div>
 
@@ -242,7 +242,7 @@ function getLocationGeocode() {
     .then(responseJson => pushToSearchArray(responseJson))
     .catch(error => {
       $('#js-error-message').text(`Something went wrong. ${error.message}`);
-      $('#js-error-message').removeClass('hidden');
+      $('#error-container').removeClass('hidden');
       });
 }
 
@@ -293,7 +293,7 @@ function getRoutesLatLon() {
     .then(responseJson => pushToResultsArray(responseJson))
     .catch(error => {
       $('#js-error-message').text(`Something went wrong: ${error.message}`);
-      $('#js-error-message').removeClass('hidden');
+      $('').removeClass('hidden');
     });
 }
 
@@ -322,7 +322,7 @@ function pushToResultsArray(responseJson) {
   else {
     // if there are no routes that match the search criteria, display error message
     $('#js-error-message').text(`We couldn't find any boulder problems in that area. Try another search.`);
-    $('.error').removeClass('hidden');
+    $('#error-container').removeClass('hidden');
   }
 }
 
@@ -357,7 +357,7 @@ function getYoutubeVideos() {
       .then(responseJson => pushToVideosArray(responseJson, i))
       .catch(error => {
         $('#js-error-message').text(`Something went wrong: ${error.message}`);
-        $('#js-error-message').removeClass('hidden');
+        $('#error-container').removeClass('hidden');
       });
   }
 }
