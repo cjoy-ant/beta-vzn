@@ -220,6 +220,12 @@ function formatYoutubeParams(params) {
   return ytQueryItems.join('&');
 }
 
+function formatYoutubeSearch(params) {
+  const ytSearchQueryItems = Object.keys(params).map(key=> 
+    `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+  return ytSearchQueryItems.join('+');
+}
+
 /********** API fetch functions **********/
 
 // inputs location into mapquest API to geocode location into lat/lon data
@@ -420,10 +426,26 @@ function appendVideos(i) {
   // j < (number of videos to list)
   for (let j=0; j < 2; j++) {
   const videoId = videosObj[i][j];
+    $(`#results-item-${i}`).append(`
+    <iframe class="video" id="video-${i}${j}" src="https://www.youtube.com/embed/${videoId}">
+    </iframe>
+    `
+    )};
+
+  const ytSearchURL = 'https://www.youtube.com/results';
+  const name = nameArray[i];
+  const grade = gradeArray[i];
+  const location = $('#js-search-location').val();
+  const params = {
+    search_query: name + ' ' + grade + ' ' + 'bouldering' + ' ' + location
+    };
+  const queryString = formatYoutubeSearch(params);
+  const url = ytSearchURL + '?' + queryString;
+
+  // Example: https://www.youtube.com/results?search_query=Emerald+City+V0+PG13+bouldering+joshua+tree%2C+ca
   $(`#results-item-${i}`).append(`
-  <iframe class="video" id="video-${i}${j}" src="https://www.youtube.com/embed/${videoId}">
-  </iframe>
-  `)};
+  <p class"link"><a href="${url}" target="_blank">Find more beta videos on YouTube</a></p>
+  `);
 }
 
 /********** Event Listener Functions **********/
@@ -474,7 +496,7 @@ function handleHomePage() {
   
   // empties the error-message and arrays holding information from previous search
   function emptyData() {
-    $('.error').addClass('hidden');
+    $('#error-container').addClass('hidden');
     $('#js-error-message').empty();
     $('.results').addClass('hidden');
     $('#results-list').empty();
