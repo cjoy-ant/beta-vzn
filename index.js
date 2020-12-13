@@ -12,8 +12,8 @@ const API = [
     },
     {
       source: 'youtube',
-      key: 'AIzaSyDylE853GqLUzIKstJZ-ZLoABfXaZ2T01Y',
-      //key: 'AIzaSyB-h0eBXMjN9EAO8nVifZkv3zh3QHuV7K8',
+      //key: 'AIzaSyDylE853GqLUzIKstJZ-ZLoABfXaZ2T01Y',
+      key: 'AIzaSyB-h0eBXMjN9EAO8nVifZkv3zh3QHuV7K8',
       searchURL: 'https://www.googleapis.com/youtube/v3/search'
     },
   ];
@@ -62,18 +62,8 @@ const vGrade = {
   ]
 };
 
-//const searchArray = {
-//  location: [],  
-//  lat: [],
-//  lon: []
-//};
-
 // SEARCH data
 const locationArray = [];
-//const geocodeObj = {
-//    lat: [],
-//    lon: []
-//};
 const latArray = [];
 const lonArray = [];
 
@@ -81,18 +71,7 @@ const lonArray = [];
 const nameArray = [];
 const gradeArray = [];
 const linkArray = [];
-// counts what # result it is on when iterating through mountain project response
-const counter = {
-    onResult: -1
-}
 const videosObj = {};
-
-//const resultsArray = {
-//  name: [],
-//  grade: [],
-//  link: [],
-////  videos: []
-//};
 
 /********** HTML Generation Functions **********/
 // generates html for start page
@@ -272,11 +251,7 @@ function pushToSearchArray(responseJson) {
 // lat => latArray[0][0]
 // lon => lonArray[0][0]
 
-// TO-DO:
-    // create request url utilizing format function
-    // use lat, lon, minDiff, maxDiff as parameters
-    // fetch data from Mountain Project API
-    // WILL NEED TO PUSH DATA for name, grade, mountain project link to [resultsArray]
+// fetches data on routes from mountain project Data API
 function getRoutesLatLon() {
   const minDiff = $('#js-search-minDiff option:selected').val();
   const maxDiff = $('#js-search-maxDiff option:selected').val();
@@ -312,7 +287,6 @@ function pushToResultsArray(responseJson) {
 
   // if there are routes available in the location, push results to respective arrays
   if (responseJson.routes.length > 0) {
-    // TO-DO: change back to i < numResults
     for (let i=0; i < numResults; i++) {
       nameArray.push(responseJson.routes[i].name);
       gradeArray.push(responseJson.routes[i].rating);
@@ -324,7 +298,6 @@ function pushToResultsArray(responseJson) {
     console.log('Mountain Project links: ' + linkArray);
 
     getYoutubeVideos();
-//    displayResults();
   }
   else {
     // if there are no routes that match the search criteria, display error message
@@ -349,9 +322,8 @@ function getYoutubeVideos() {
 
     const params = {
       key: API[2].key,
-      // maxResults for videos defaulted to 3
-      // TO-DO: change back to 3
-      maxResults: 3
+      // maxResults for videos defaulted to 2
+      maxResults: 2
       };
 
     const queryString = formatYoutubeParams(params);
@@ -375,11 +347,10 @@ function pushToVideosArray(responseJson, i) {
   console.log(responseJson);
   console.log(`Pushing videos to videosObj[${i}]`);
 
-//  const numResults = $('#js-max-results').val();
   videosObj[i] = [];
 
   // j < (number of videos to list)
-  for (let j=0; j < 3; j++) {
+  for (let j=0; j < 2; j++) {
     const videoId = responseJson.items[j].id.videoId;
     console.log(`Video ${j+1}: https://www.youtube.com/watch?v=` + videoId);
     videosObj[`${i}`].push(videoId);
@@ -391,12 +362,8 @@ function pushToVideosArray(responseJson, i) {
 function displayResults(i) {
   console.log('Displaying results');
   $('.results').removeClass('hidden');
-//  const numResults = $('#js-max-results').val();
-//  const index = nameArray.length;
 
   // iterates through Mountain Project data from respective arrays and generates HTML for results
-  // TO-DO: change back to i < numResults
-//    for (let i=0; i < 2; i++) {
     $('#results-list').append(`
     <li id="results-item-${i}"><h3 class="name">${nameArray[i]}</h3>
     <p class="grade">Grade: ${gradeArray[i]}</p>
@@ -407,24 +374,10 @@ function displayResults(i) {
     `);
 
     appendVideos(i);
-//    }
 }
 
-// iterates through Youtube video data from videosArray and appends <li> for each link to respective <ul>
-// TO-DO: change back to i < 3 (will display 3 videos)
-//function appendVideos(i) {
-////  const index = counter.onResult - 1;
-//// j < (number of videos to list)
-//  for (let j=0; j < 3; j++) {
-//  const videoId = videosObj[i][j];
-//  $(`#results-item-${i}`).append(`
-//    <p class="video"><a href="https://youtube.com/watch?v=${videoId}" 
-//    target="_blank">Video ${j+1}</a></p>`);
-//  }
-//}
 // embeds youtube video into html and displays to DOM
 function appendVideos(i) {
-  //  const index = counter.onResult - 1;
   // j < (number of videos to list)
   for (let j=0; j < 2; j++) {
   const videoId = videosObj[i][j];
@@ -460,63 +413,60 @@ function handleHomePage() {
   });
 }
   
-  // listens for when user clicks onf #about-page-btn in nav
-  function handleAboutPage() {
-    $('#about-page-btn').click(event => {
-      console.log('About Page clicked');
-      event.preventDefault();
-      $('main').html(generateAboutPage());
-    });
-  }
-  
-  // listens for when user clicks on #search-page-btn in nav
-  function handleSearchPage() {
-    $('#search-page-btn').click(event => {
-      console.log('Search Page clicked');
-      event.preventDefault();
-      $('#results-list').empty();
-      $('main').html(generateSearchPage());
-      generateGradeList();
-      handleSubmit();
-    });
-  }
-  
-  // listens for the user clicks #search-btn to submit form.search
-  // TO-DO:
-      // add GET functions to run when SEARCH is clicked
-  function handleSubmit() {
-    $('form').submit(event => {
-      event.preventDefault();
-      emptyData();
-      console.log('Searching');
-      const locationString = $('#js-search-location').val();
-      locationArray.push(locationString);
-      getLocationGeocode();
-  //      .then(results => displayResults(results));
-    });
-  }
-  
-  // empties the error-message and arrays holding information from previous search
-  function emptyData() {
-    $('#error-container').addClass('hidden');
-    $('#js-error-message').empty();
-    $('.results').addClass('hidden');
+// listens for when user clicks onf #about-page-btn in nav
+function handleAboutPage() {
+  $('#about-page-btn').click(event => {
+    console.log('About Page clicked');
+    event.preventDefault();
+    $('main').html(generateAboutPage());
+  });
+}
+
+// listens for when user clicks on #search-page-btn in nav
+function handleSearchPage() {
+  $('#search-page-btn').click(event => {
+    console.log('Search Page clicked');
+    event.preventDefault();
     $('#results-list').empty();
-    latArray.length = 0;
-    lonArray.length = 0;
-    nameArray.length = 0;
-    gradeArray.length = 0;
-    linkArray.length = 0;
-    videosObj.length = 0;
-  }
-  
-  /********** Initializing Function **********/
-  function runApp() {
-    generateHomePage();
-    handleHomePage();
-    handleAboutPage();
-    handleSearchPage();
+    $('main').html(generateSearchPage());
+    generateGradeList();
     handleSubmit();
-  }
-  
-  $(runApp)
+  });
+}
+
+// listens for the user clicks #search-btn to submit form.search
+function handleSubmit() {
+  $('form').submit(event => {
+    event.preventDefault();
+    emptyData();
+    console.log('Searching');
+    const locationString = $('#js-search-location').val();
+    locationArray.push(locationString);
+    getLocationGeocode();
+  });
+}
+
+// empties the error-message and arrays holding information from previous search
+function emptyData() {
+  $('#error-container').addClass('hidden');
+  $('#js-error-message').empty();
+  $('.results').addClass('hidden');
+  $('#results-list').empty();
+  latArray.length = 0;
+  lonArray.length = 0;
+  nameArray.length = 0;
+  gradeArray.length = 0;
+  linkArray.length = 0;
+  videosObj.length = 0;
+}
+
+/********** Initializing Function **********/
+function runApp() {
+  generateHomePage();
+  handleHomePage();
+  handleAboutPage();
+  handleSearchPage();
+  handleSubmit();
+}
+
+$(runApp)
