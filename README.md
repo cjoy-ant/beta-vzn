@@ -27,15 +27,15 @@ Technology used:
 
 ## Screenshots & Examples
 Home: 
-![Home Page](images/screenshots/betavzn-home.jpg)
+![Home Page](beta-vzn/images/screenshots/betavzn-home.jpg)
 
 About:
-![About Page](images/screenshots/betavzn-about.jpg)
+![About Page](beta-vzn/images/screenshots/betavzn-about.jpg)
 
 Search:
-![Search Page](images/screenshots/betavzn-search.jpg)
+![Search Page](beta-vzn/images/screenshots/betavzn-search.jpg)
 
 Example Search Filters & Results:
-![Example Search](images/screenshots/betavzn-search-input-example.jpg)
+![Example Search](beta-vzn/images/screenshots/betavzn-search-input-example.jpg)
 
-![Example Results](images/screenshots/betavzn-results-example.jpg)
+![Example Results](beta-vzn/images/screenshots/betavzn-results-example.jpg)
