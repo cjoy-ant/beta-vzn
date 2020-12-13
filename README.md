@@ -5,7 +5,7 @@ Welcome to my webapp, [BetaVzn](https://cjoy-ant.github.io/beta-vzn/) ("beta vis
 
 BetaVzn will allow the targeted user audience (rock climbers) to search for boulder problems/routes based on location and grade/difficulty. The user can add additional search filters, including minimum grade/difficulty, maximum grade/difficulty, and number of results to display. The feature that makes this app unique is its consolidationg of Mountain Project information and relevant YouTube videos.
 
-The app will return a list of boulder problems, diplaying for a single result:
+The app will return a list of boulder problems and display the following information for a single result:
 * Name of the boulder problem/route
 * Grade/difficulty
 * Link to Mountain Project page
