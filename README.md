@@ -1,4 +1,4 @@
-# Beta Vzn
+# BetaVzn
 Welcome to my webapp, [BetaVzn](https://cjoy-ant.github.io/beta-vzn/) ("beta vision")
 
 #### 'Beta': the solution, or movements, that a climber uses to solve and finish a boulder problem.
