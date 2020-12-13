@@ -128,7 +128,7 @@ function generateAboutPage() {
     
       <h3>How to use this app</h3>
       <ul>
-        <li>Enter a location (City, State)</li>
+        <li>Enter a location (City, State) -- this app works best for locations within the USA and Canada</li>
         <li>Choose the range of difficulty level you would like to search for by selecting the Minimum and Maximum Grade</li>
         <li>Enter a number 1-10 of how many results (boulder problems) you would like to populate</li>
         <li>Click 'Search'</li>
