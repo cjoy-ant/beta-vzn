@@ -1,9 +1,7 @@
 # Beta Vzn
-Welcome to my webapp, Beta Vzn ("beta vision")!
+Welcome to my webapp, [Beta Vzn](https://cjoy-ant.github.io/beta-vzn/) ("beta vision")
 
-[Link to Live Project](https://cjoy-ant.github.io/beta-vzn/)
-
-### 'Beta': the solution, or movements, that a climber uses to solve and finish a boulder problem.
+#### 'Beta': the solution, or movements, that a climber uses to solve and finish a boulder problem.
 
 This app will allow the targeted user audience (rock climbers) to search for boulder problems/routes based on location and grade/difficulty. The user can add additional search filters, including minimum grade/difficulty, maximum grade/difficulty, and number of results to display.
 
@@ -26,16 +24,17 @@ Technology used:
     -[jQuery]
 
 ## Screenshots & Examples
-Home: 
+#### Home: 
 ![Home Page](images/screenshots/betavzn-home.png)
 
-About:
+#### About:
 ![About Page](images/screenshots/betavzn-about.png)
 
-Search:
+#### Search:
 ![Search Page](images/screenshots/betavzn-search.png)
 
-Example Search Filters & Results:
+#### Example Search Filters:
 ![Example Search](images/screenshots/betavzn-search-input-example.png)
 
+#### Example Results:
 ![Example Results](images/screenshots/betavzn-results-example.png)
