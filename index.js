@@ -88,7 +88,6 @@ function generateHomePage() {
 
 // generates html for about me page/section
 function generateAboutPage() {
-  console.log('Generating About Page');
   return `
     <div class="about">
       <h2>About</h2>
@@ -122,7 +121,6 @@ function generateAboutPage() {
 }
 
 function generateSearchPage() {
-  console.log('Generating Search Page');
   return `
     <div class="search">
       
@@ -414,7 +412,6 @@ function handleHomePage() {
 // listens for when user clicks onf #about-page-btn in nav
 function handleAboutPage() {
   $('#about-page-btn').click(event => {
-    console.log('About Page clicked');
     event.preventDefault();
     $('main').html(generateAboutPage());
   });
@@ -423,7 +420,6 @@ function handleAboutPage() {
 // listens for when user clicks on #search-page-btn in nav
 function handleSearchPage() {
   $('#search-page-btn').click(event => {
-    console.log('Search Page clicked');
     event.preventDefault();
     $('#results-list').empty();
     $('main').html(generateSearchPage());
@@ -437,7 +433,6 @@ function handleSubmit() {
   $('form').submit(event => {
     event.preventDefault();
     emptyData();
-    console.log('Searching');
     const locationString = $('#js-search-location').val();
     locationArray.push(locationString);
     getLocationGeocode();
