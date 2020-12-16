@@ -130,22 +130,22 @@ function generateSearchPage() {
       <h3>Search for boulder problems</h3>
       <br>
       <form class="search" id="search-form">
-        <label for="search-location">Location: </label>
+        <label for="js-search-location">Location: </label>
         <input type="text" name="search-location" id="js-search-location" placeholder="City, State" required>
         <p class="small">Example: Joshua Tree, CA</p>
 
-        <label for="search-minDiff">Minimum Grade</label>
+        <label for="js-search-minDiff">Minimum Grade</label>
         <ul class="search" id="js-search-minDiff-list">
           <select class="search" name="search-minDiff" id="js-search-minDiff" required></select>
         </ul>
 
-        <label for="search-maxDiff">Maximum Grade</label>
+        <label for="js-search-maxDiff">Maximum Grade</label>
         <ul class="search" name="search-maxDiff" id="js-search-maxDiff-list">
           <select class="search" name="search-maxDiff" id="js-search-maxDiff" required></select>
         </ul>
 
         <br>
-        <label for="max-results">Maximum number of Results to Show</label>
+        <label for="js-max-results">Maximum number of Results to Show</label>
         <input type="number" name="max-results" id="js-max-results" min="1" max="10" value="1">
         <p class="small">Enter a number 1-10</p>
 
@@ -313,9 +313,7 @@ function getYoutubeVideos() {
   const numResults = $('#js-max-results').val();
   console.log('Searching for beta videos');
 
-  // TO-DO: change back to i < numResults
   for (let i=0; i < numResults; i++) {
-    // keeps track of what result it is on to be utilized as index for grabbing data from YouTube API response
     const name = nameArray[i];
     const grade = gradeArray[i];
     const q = name + '%20' + grade + '%20' + 'bouldering';
