@@ -19,7 +19,7 @@ Sources:
 Technology used:
 * HTML
 * CSS
-* Javascript
+* JavaScript
 * jQuery
 
 ## Screenshots & Examples
